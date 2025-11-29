@@ -135,7 +135,6 @@ See the [final report](DOC/final_report.pdf) for complete results, analysis, and
 - **Model Documentation**: 
   - [Baseline SIR Model](SRC/BASELINE_SIR_DOCUMENTATION.md)
   - [Extended SIR Model](SRC/EXTENDED_SIR_DOCUMENTATION.md)
-- **Software Package**: [README.txt](README.txt)
 - **Final Report**: [DOC/final_report.pdf](DOC/final_report.pdf)
 - **Poster**: [DOC/poster.pdf](DOC/poster.pdf)
 
@@ -152,7 +151,7 @@ See the [final report](DOC/final_report.pdf) for complete results, analysis, and
 If you use this work, please cite:
 
 ```bibtex
-@article{xue2025socioeconomic,
+@article{Xue,Zhang2025socioeconomic,
   title={Socioeconomic Determinants and Mobility Patterns in COVID-19 Risk: A Spatial Network Analysis of the U.S. Counties},
   author={Xue, Holin and Zhang, Priscilla},
   journal={CSE 8803: Data Science for Epidemiology},

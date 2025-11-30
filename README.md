@@ -95,26 +95,87 @@ Place data files in the `Data/` directory:
    Continue in the same notebook to run the extended model.
 
 3. **GNN Model**:
-   [..............TBD....................]
-
+      ```bash
+   jupyter notebook GNN.ipynb
+   ```
 
 
 ## Project Structure
 
 ```
-model/
-├── README.md                          # This file
-├── Data/                              # Data directory
+├── README.md                         # This file
+├── Data Compilation/                 # Raw Data
+│   ├── covid/
+│   │   ├── United_States_COVID-19_Community_Levels_by_County_20251102.csv
+│   │   └── data dictionary.png
+│   ├── mobility/
+│   │   ├── 2020_US_Region_Mobility_Report.csv
+│   │   ├── 2021_US_Region_Mobility_Report.csv
+│   │   └── 2022_US_Region_Mobility_Report.csv
+│   ├── socioeconomic/
+│   │   ├── B19057/
+│   │   │   ├── ACSDT5Y2023.B19057-Column-Metadata.csv
+│   │   │   ├── ACSDT5Y2023.B19057-Data.csv
+│   │   │   └── ACSDT5Y2023.B19057-Table-Notes.txt
+│   │   ├── B19083/
+│   │   │   ├── ACSDT5Y2023.B19083-Column-Metadata.csv
+│   │   │   ├── ACSDT5Y2023.B19083-Data.csv
+│   │   │   └── ACSDT5Y2023.B19083-Table-Notes.txt
+│   │   ├── DP02/
+│   │   │   ├── ACSDP5Y2023.DP02-Column-Metadata.csv
+│   │   │   ├── ACSDP5Y2023.DP02-Data.csv
+│   │   │   └── ACSDP5Y2023.DP02-Table-Notes.txt
+│   │   ├── DP04/
+│   │   │   ├── ACSDP5Y2023.DP04-Column-Metadata.csv
+│   │   │   ├── ACSDP5Y2023.DP04-Data.csv
+│   │   │   └── ACSDP5Y2023.DP04-Table-Notes.txt
+│   │   ├── DP05/
+│   │   │   ├── ACSDP5Y2023.DP05-Column-Metadata.csv
+│   │   │   ├── ACSDP5Y2023.DP05-Data.csv
+│   │   │   └── ACSDP5Y2023.DP05-Table-Notes.txt
+│   │   ├── S1501/
+│   │   │   ├── ACSST5Y2023.S1501-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S1501-Data.csv
+│   │   │   └── ACSST5Y2023.S1501-Table-Notes.txt
+│   │   ├── S1702/
+│   │   │   ├── ACSST5Y2023.S1702-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S1702-Data.csv
+│   │   │   └── ACSST5Y2023.S1702-Table-Notes.txt
+│   │   ├── S1903/
+│   │   │   ├── ACSST5Y2023.S1903-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S1903-Data.csv
+│   │   │   └── ACSST5Y2023.S1903-Table-Notes.txt
+│   │   ├── S2301/
+│   │   │   ├── ACSST5Y2023.S2301-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S2301-Data.csv
+│   │   │   └── ACSST5Y2023.S2301-Table-Notes.txt
+│   │   ├── S2701/
+│   │   │   ├── ACSST5Y2023.S2701-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S2701-Data.csv
+│   │   │   └── ACSST5Y2023.S2701-Table-Notes.txt
+│   │   ├── S2801/
+│   │   │   ├── ACSST5Y2023.S2801-Column-Metadata.csv
+│   │   │   ├── ACSST5Y2023.S2801-Data.csv
+│   │   │   └── ACSST5Y2023.S2801-Table-Notes.txt
+│   │   ├── .Rhistory
+│   │   ├── Variable Dictionary.docx
+│   │   ├── data_compilation.R
+│   │   ├── socioeconomic.Rproj
+│   │   └── socioeconomic_data.csv
+│   └── county_adjacency2024.txt
+├── Data/                             # Data directory
 │   ├── county_adjacency2024.txt
 │   ├── United_States_COVID-19_Community_Levels_by_County_20251102.csv
 │   └── socioeconomic_data.csv
-├── SRC/                               # Source code
+├── SRC/                              # Source code
 │   ├── spatial_sir_baseline_models.ipynb
+|   ├── GNN.ipynb
 │   ├── BASELINE_SIR_DOCUMENTATION.md
 │   └── EXTENDED_SIR_DOCUMENTATION.md
-└── DOC/                               # Documentation
+└── DOC/                              # Documentation
     ├── final_report.pdf
     └── poster.pdf
+
 ```
 
 ## Results

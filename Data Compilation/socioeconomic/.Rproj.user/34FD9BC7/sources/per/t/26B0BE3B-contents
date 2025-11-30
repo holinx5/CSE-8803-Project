@@ -1,0 +1,129 @@
+
+
+# Percent population aged 25 and above without a high school diploma
+education <- read.csv("./S1501/ACSST5Y2023.S1501-Data.csv")
+education_col <- 'S1501_C02_014E'
+education <- education[, c('GEO_ID', 'NAME', education_col)]
+education <- education[-1, ]
+education$S1501_C02_014E <- as.numeric(education$S1501_C02_014E)
+
+
+# Median household income in US dollars
+income <- read.csv("./S1903/ACSST5Y2023.S1903-Data.csv")
+income_col <- 'S1903_C03_001E'
+income <- income[, c('GEO_ID', 'NAME', income_col)]
+income <- income[2:3223, ]
+income$S1903_C03_001E <- as.numeric(income$S1903_C03_001E)
+
+# Gini Index
+gini <- read.csv("./B19083/ACSDT5Y2023.B19083-Data.csv")
+gini_col <- 'B19083_001E'
+gini <- gini[, c('GEO_ID', 'NAME', gini_col)]
+gini <- gini[-1, ]
+gini$B19083_001E <- as.numeric(gini$B19083_001E)
+
+# Median home value in US dollars (1)
+# Median gross rent in US dollars (2)
+# Median monthly mortgage in US dollars (3)
+# Percent of owner-occupied housing units (4)
+# Percent of households without a motor vehicle (5)
+# Percent of households with more than 1 person per room (6) 100 - X
+# Percent of vacant housing units (7)
+# Percent of households where rent is greater than 35% of household income (8)
+housing <- read.csv("./DP04/ACSDP5Y2023.DP04-Data.csv")
+housing_cols <- c('DP04_0089E', 'DP04_0134E', 'DP04_0101E', 'DP04_0046PE',
+                  'DP04_0058PE', 'DP04_0077PE', 'DP04_0003PE', 'DP04_0142PE')
+housing <- housing[, c('GEO_ID', 'NAME', housing_cols)]
+housing <- housing[-1, ]
+housing[, housing_cols] <- sapply(housing[, housing_cols], as.numeric)
+housing$DP04_0077PE <- 100 - housing$DP04_0077PE
+
+# Percent of civilian labor force population aged 16 years and older who are unemployed
+unemployment <- read.csv("./S2301/ACSST5Y2023.S2301-Data.csv")
+unemployment_col <- 'S2301_C04_001E'
+unemployment <- unemployment[, c('GEO_ID', 'NAME', unemployment_col)]
+unemployment <- unemployment[-1, ]
+unemployment$S2301_C04_001E <- as.numeric(unemployment$S2301_C04_001E)
+
+# Percent of families below federal poverty level
+poverty <- read.csv("./S1702/ACSST5Y2023.S1702-Data.csv")
+poverty_col <- 'S1702_C02_001E'
+poverty <- poverty[, c('GEO_ID', 'NAME', poverty_col)]
+poverty <- poverty[-1, ]
+poverty$S1702_C02_001E <- as.numeric(poverty$S1702_C02_001E)
+
+# Percent of single-parent households with children under 18 years
+single_parent <- read.csv("./DP02/ACSDP5Y2023.DP02-Data.csv")
+single_parent_col <- c('DP02_0007PE', 'DP02_0011PE')
+single_parent <- single_parent[, c('GEO_ID', 'NAME', single_parent_col)]
+single_parent <- single_parent[-1, ]
+single_parent[, single_parent_col] <- sapply(single_parent[, single_parent_col], as.numeric)
+single_parent$single_parent_percent <- single_parent$DP02_0007PE + single_parent$DP02_0011PE
+single_parent <- single_parent[, c('GEO_ID', 'NAME', 'single_parent_percent')]
+
+# Percent of non-white
+race <- read.csv("./DP05/ACSDP5Y2023.DP05-Data.csv")
+race_col <- "DP05_0037PE"
+race <- race[, c('GEO_ID', 'NAME', race_col)]
+race <- race[-1, ]
+race$DP05_0037PE <- 100 - as.numeric(race$DP05_0037PE)
+
+# Percent of households receiving publi c assistance income
+public_assistance <- read.csv("./B19057/ACSDT5Y2023.B19057-Data.csv")
+public_assistance_col <- c('B19057_002E', 'B19057_001E')
+public_assistance <- public_assistance[, c('GEO_ID', 'NAME', public_assistance_col)]
+public_assistance <- public_assistance[-1, ]
+public_assistance[, public_assistance_col] <- sapply(public_assistance[, public_assistance_col], as.numeric)
+public_assistance$public_assistance_percent <- 
+  (public_assistance$B19057_002E / public_assistance$B19057_001E) * 100
+public_assistance <- public_assistance[, c('GEO_ID', 'NAME', 'public_assistance_percent')]
+
+
+# Percent of individuals without health insurance
+health_insurance <- read.csv("./S2701/ACSST5Y2023.S2701-Data.csv")
+health_insurance_col <- 'S2701_C05_001E'
+health_insurance <- health_insurance[, c('GEO_ID', 'NAME', health_insurance_col)]
+health_insurance <- health_insurance[-1, ]
+health_insurance$S2701_C05_001E <- as.numeric(health_insurance$S2701_C05_001E)
+
+# Merge all data frames by GEO_ID and NAME
+socioeconomic_data <- Reduce(function(x, y) merge(x, y, by = c('GEO_ID', 'NAME')),
+                             list(education, income, gini, housing, unemployment,
+                                  poverty, single_parent, race, public_assistance, health_insurance))
+
+# Rename columns for clarity
+colnames(socioeconomic_data) <- c(
+  'GEO_ID', 'NAME',
+  'pct_no_hs',
+  'med_inc',
+  'gini',
+  'med_home_val',
+  'med_rent',
+  'med_mortgage',
+  'pct_owner_occ',
+  'pct_no_vehicle',
+  'pct_overcrowded',
+  'pct_vacant',
+  'pct_rent_gt35',
+  'pct_unemployed',
+  'pct_poverty',
+  'pct_single_parent',
+  'pct_nonwhite',
+  'pct_public_assist',
+  'pct_uninsured'
+)
+
+write.csv(socioeconomic_data, "./socioeconomic_data.csv", row.names = FALSE)
+
+# read
+socioeconomic_data <- read.csv("./socioeconomic_data.csv")
+
+# county_fips from GEO_ID
+socioeconomic_data$county_fips <- substr(socioeconomic_data$GEO_ID, 10, 14)
+
+# State and county names from NAME
+socioeconomic_data$state <- sub(".*, ", "", socioeconomic_data$NAME)
+socioeconomic_data$county <- sub(",.*", "", socioeconomic_data$NAME)
+
+
+

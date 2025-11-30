@@ -143,10 +143,10 @@ This analysis implements Graph Neural Networks (GNNs) to predict COVID-19 case r
 
 | Metric | Original GCN | Improved GAT | Improvement |
 |--------|-------------|--------------|-------------|
-| **MSE** | [Value from run] | [Value from run] | [Percentage] |
-| **MAE** | [Value from run] | [Value from run] | [Percentage] |
-| **RMSE** | [Value from run] | [Value from run] | [Percentage] |
-| **R² Score** | [Value from run] | [Value from run] | [Percentage] |
+| **MSE** | 1567.3646 | 1673.0570 |  -6.74% |
+| **MAE** | 27.4770 | 28.0547 | -2.10% |
+| **RMSE** | 39.5900 | 40.9030 | -3.32% |
+| **R² Score** | 0.4410 | 0.4034 | -8.55% |
 
 ### Feature Importance Analysis
 
